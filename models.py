@@ -11,6 +11,9 @@ class User(Base):
     name: Mapped[str] = mapped_column(String(30))
     addresses: Mapped[list["Address"]] = relationship(back_populates="user")
 
+    def __repr__(self):
+        return f"User(id={self.id}, name='{self.name}')"
+
 class Address(Base):
     __tablename__ = "address"
 
@@ -20,5 +23,6 @@ class Address(Base):
 
     user: Mapped["User"] = relationship(back_populates="addresses")
 
-
+    def __repr__(self):
+        return f"Address(id={self.id}, email='{self.email}', user_id={self.user_id})"
 
